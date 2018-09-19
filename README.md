@@ -1,13 +1,13 @@
 # FlxC
-FlexConvert to help you convert your patches to MS Easily and Accurately!
+<b>Flex2MSConverter</b> to help you convert your patches to MS Easily and Accurately!
 
 # Installation
-iOS: Type 'su' in terminal to enter Root Mode, and then run the FLxCInstaller.sh\
-MacOS: Double-Click the install.command
+<b>iOS:</b> Type 'su' in terminal to enter Root Mode, and then run the FLxCInstaller.sh\
+<b>MacOS:</b> Double-Click the install.command
 
 # Usage
-FlxC (Shows Menu to select Patch)\
-FlxC [Patch Name] 
+<b>FlxC</b> (Shows Menu to select Patch)\
+<b>FlxC [Patch Name]</b>
 
 # Features
 1) Finds Classes, Methods and hooks them accordingly
