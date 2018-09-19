@@ -23,4 +23,4 @@
 2) It has been tested on MTerminal v1.4-5 on iPad Mini 9.3.5
 3) Make sure you have XML Parser ToolKit, and xml2 form Cydia
 4) This Script is heavily dependant on 'xmllint'
-5) If you encounter any bugs/errors, contact @TheArmKing on Discord - TheArmKing#6647
+5) <b>If you encounter any bugs/errors, contact @TheArmKing on Discord - TheArmKing#6647</b>
