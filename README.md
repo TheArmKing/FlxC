@@ -1,5 +1,7 @@
 # FlxC
-<b>Flex2MSConverter</b> to help you convert your patches to MS Easily and Accurately!
+<b>Flex2MSConverter</b> to help you convert your patches to MS Easily and Accurately!\
+
+*Why MacOS?* -> If you are wondering so, then its because i first wrote the bash script on my mac, then ported it to iOS :P 
 
 # Installation
 <b>iOS:</b> Type 'su' in terminal to enter Root Mode, and then run the FLxCInstaller.sh\
