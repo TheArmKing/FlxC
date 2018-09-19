@@ -17,7 +17,7 @@
 3) Reads which argument is modified, and which is not
 4) returns a value or adds a %orig hook accordingly
 5) Auto hooks multiple functions in the same class
-6) Supports all the Data Types! --> Int,Float,Bool,Long,Double,ID,NSNumber,NSString,UIColor,NSDate ( if you know more Contact me )
+6) Supports all the Data Types! --> Int, Float, Bool, Long, Double, ID, NSNumber, NSString, UIColor, NSDate ( if you know more Contact me )
 7) Fast and Simple to Use! ( Also provides a Selector Menu to Choose from all the patches on your device )
 
 # Note
