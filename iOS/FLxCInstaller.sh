@@ -112,59 +112,61 @@ for (( x=1; x<=\$ef1; x++ )); do
       ns2="\$xval"
       xmlp "/plist/dict/array/dict[.//string='\$pewt']/array/dict[\${x}]/array/dict[\${y}]/dict[.//key='value']/key[text()='type']/following-sibling::integer[position()=1]/text()"
       ns3="\$xval"
-      if ( [ "\$ns1" -gt "0" ] && [ "\$ns1" -le "4" ] ) && [ "\$ns2" == "1" ] && [ "\$ns3" == "1" ] ; then
-        xmlp "/plist/dict/array/dict[.//string='\$pewt']/array/dict[\${x}]/array/dict[\${y}]/dict[.//key='value']/key[text()='value']/following-sibling::*[position()=1]/text()"
-        ve="\$xval"
-        if [ "\$ns1" == "2" ]; then
-          if [ "\${ve//./}" == "\$ve" ]; then erg="[NSNumber numberWithInteger: \$ve]"; else erg="[NSNumber numberWithFloat: \$ve]"; fi
-        elif [ "\$ns1" == "1" ]; then
-          erg="@\"\$ve\""
-        elif [ "\$ns1" == "3" ]; then
-          IFS=':' read -r -a art <<< "\$ve"
-          IFS=',' read -r -a ae <<<  "\${art[1]}"
-          if [ "\${ae[0]}" == "255" ]; then re=1.0; elif [ "\${ae[0]}" == "0" ]; then re=0.0; else re="\$(echo - | awk "{print \${ae[0]} / 255}")"; fi
-          if [ "\${ae[1]}" == "255" ]; then g=1.0; elif [ "\${ae[1]}" == "0" ]; then g=0.0; else g="\$(echo - | awk "{print \${ae[1]} / 255}")"; fi
-          if [ "\${ae[2]}" == "255" ]; then be=1.0; elif [ "\${ae[2]}" == "0" ]; then be=0.0; else be="\$(echo - | awk "{print \${ae[2]} / 255}")"; fi
-          if [ "\${ae[3]}" == "255" ]; then a=1.0; elif [ "\${ae[3]}" == "0" ]; then a=0.0; else a="\$(echo - | awk "{print \${ae[3]} / 255}")"; fi
-          erg="[UIColor colorWithRed:\$re green:\$g blue:\$be alpha:\$a]"
-        elif [ "\$ns1" == "4" ]; then
-          if [ "\$fsd" != "1" ]; then
-            fsd=1
-            awk 'NR==3{print "#import <Foundation/Foundation.h>"}1' /var/mobile/Documents/Flex/tweak.txt >/var/mobile/Documents/Flex/ffs.txt && rm /var/mobile/Documents/Flex/tweak.txt && mv /var/mobile/Documents/Flex/ffs.txt /var/mobile/Documents/Flex/tweak.txt
-            awk 'NR==6{print ""}1' /var/mobile/Documents/Flex/tweak.txt >/var/mobile/Documents/Flex/ffs.txt && rm /var/mobile/Documents/Flex/tweak.txt && mv /var/mobile/Documents/Flex/ffs.txt /var/mobile/Documents/Flex/tweak.txt
-            echo -en "@interface NSDate (MBDateCat)\n+ (NSDate *)dateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day hour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second;\n@end\n\n@implementation NSDate (MBDateCat)\n+ (NSDate *)dateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day hour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second {\n    NSCalendar *calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];\n    NSDateComponents *components = [[[NSDateComponents alloc] init] autorelease];\n    [components setYear:year];\n    [components setMonth:month];\n    [components setDay:day];\n    [components setHour:hour];\n    [components setMinute:minute];\n    [components setSecond:second];\n    return [calendar dateFromComponents:components];\n}\n@end\n" >/var/mobile/Documents/Flex/date.txt
-            tac /var/mobile/Documents/Flex/date.txt>>/var/mobile/Documents/Flex/det.txt
-            rm /var/mobile/Documents/Flex/date.txt
-            while IFS= read -r lin; do
-              awk -v "n=6" -v "s=\${lin}" '(NR==n) { print s } 1' /var/mobile/Documents/Flex/tweak.txt >/var/mobile/Documents/Flex/fileqw.txt
-              rm /var/mobile/Documents/Flex/tweak.txt
-              mv /var/mobile/Documents/Flex/fileqw.txt /var/mobile/Documents/Flex/tweak.txt
-            done < /var/mobile/Documents/Flex/det.txt
-            rm /var/mobile/Documents/Flex/det.txt
-          fi
-          if [ "\$fsd" == "1" ]; then
-            IFS='T' read -r -a aee <<< "\$ve"
-            IFS=':' read -r -a aoo <<< "\${aee[0]}"
-            IFS='+' read -r -a auu <<< "\${aee[1]}"
-            IFS='-' read -r -a aww <<< "\${aoo[1]}"
-            IFS=':' read -r -a aqq <<< "\${auu[0]}"
-            fm=0
-            for de in "\${aww[@]}"; do
-              if [ "\${de::1}" == "0" ]; then
-                fx="\$(echo "\${de:1:\${#de}-1}")"
-                aww[\$fm]="\$fx"
-              fi
-              (( fm = fm + 1 ))
-            done
-            fc=0
-            for ded in "\${aqq[@]}"; do
-              if [ "\${ded::1}" == "0" ]; then
-                fxd="\$(echo "\${ded:1:\${#ded}-1}")"
-                aqq[\$fc]="\$fxd"
-              fi
-              (( fc = fc + 1 ))
-            done
-            erg="[NSDate dateWithYear:"\${aww[0]}" month:"\${aww[1]}" day:"\${aww[2]}" hour:"\${aqq[0]}" minute:"\${aqq[1]}" second:"\${aqq[2]}"]"
+      if [[ \$ns1 =~ ^-?[0-9]+$ ]]; then
+        if ( [ "\$ns1" -gt "0" ] && [ "\$ns1" -le "4" ] ) && [ "\$ns2" == "1" ] && [ "\$ns3" == "1" ] ; then
+          xmlp "/plist/dict/array/dict[.//string='\$pewt']/array/dict[\${x}]/array/dict[\${y}]/dict[.//key='value']/key[text()='value']/following-sibling::*[position()=1]/text()"
+          ve="\$xval"
+          if [ "\$ns1" == "2" ]; then
+            if [ "\${ve//./}" == "\$ve" ]; then erg="[NSNumber numberWithInteger: \$ve]"; else erg="[NSNumber numberWithFloat: \$ve]"; fi
+          elif [ "\$ns1" == "1" ]; then
+            erg="@\"\$ve\""
+          elif [ "\$ns1" == "3" ]; then
+            IFS=':' read -r -a art <<< "\$ve"
+            IFS=',' read -r -a ae <<<  "\${art[1]}"
+            if [ "\${ae[0]}" == "255" ]; then re=1.0; elif [ "\${ae[0]}" == "0" ]; then re=0.0; else re="\$(echo - | awk "{print \${ae[0]} / 255}")"; fi
+            if [ "\${ae[1]}" == "255" ]; then g=1.0; elif [ "\${ae[1]}" == "0" ]; then g=0.0; else g="\$(echo - | awk "{print \${ae[1]} / 255}")"; fi
+            if [ "\${ae[2]}" == "255" ]; then be=1.0; elif [ "\${ae[2]}" == "0" ]; then be=0.0; else be="\$(echo - | awk "{print \${ae[2]} / 255}")"; fi
+            if [ "\${ae[3]}" == "255" ]; then a=1.0; elif [ "\${ae[3]}" == "0" ]; then a=0.0; else a="\$(echo - | awk "{print \${ae[3]} / 255}")"; fi
+            erg="[UIColor colorWithRed:\$re green:\$g blue:\$be alpha:\$a]"
+          elif [ "\$ns1" == "4" ]; then
+            if [ "\$fsd" != "1" ]; then
+              fsd=1
+              awk 'NR==3{print "#import <Foundation/Foundation.h>"}1' /var/mobile/Documents/Flex/tweak.txt >/var/mobile/Documents/Flex/ffs.txt && rm /var/mobile/Documents/Flex/tweak.txt && mv /var/mobile/Documents/Flex/ffs.txt /var/mobile/Documents/Flex/tweak.txt
+              awk 'NR==6{print ""}1' /var/mobile/Documents/Flex/tweak.txt >/var/mobile/Documents/Flex/ffs.txt && rm /var/mobile/Documents/Flex/tweak.txt && mv /var/mobile/Documents/Flex/ffs.txt /var/mobile/Documents/Flex/tweak.txt
+              echo -en "@interface NSDate (MBDateCat)\n+ (NSDate *)dateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day hour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second;\n@end\n\n@implementation NSDate (MBDateCat)\n+ (NSDate *)dateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day hour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second {\n    NSCalendar *calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];\n    NSDateComponents *components = [[[NSDateComponents alloc] init] autorelease];\n    [components setYear:year];\n    [components setMonth:month];\n    [components setDay:day];\n    [components setHour:hour];\n    [components setMinute:minute];\n    [components setSecond:second];\n    return [calendar dateFromComponents:components];\n}\n@end\n" >/var/mobile/Documents/Flex/date.txt
+              tac /var/mobile/Documents/Flex/date.txt>>/var/mobile/Documents/Flex/det.txt
+              rm /var/mobile/Documents/Flex/date.txt
+              while IFS= read -r lin; do
+                awk -v "n=6" -v "s=\${lin}" '(NR==n) { print s } 1' /var/mobile/Documents/Flex/tweak.txt >/var/mobile/Documents/Flex/fileqw.txt
+                rm /var/mobile/Documents/Flex/tweak.txt
+                mv /var/mobile/Documents/Flex/fileqw.txt /var/mobile/Documents/Flex/tweak.txt
+              done < /var/mobile/Documents/Flex/det.txt
+              rm /var/mobile/Documents/Flex/det.txt
+            fi
+            if [ "\$fsd" == "1" ]; then
+              IFS='T' read -r -a aee <<< "\$ve"
+              IFS=':' read -r -a aoo <<< "\${aee[0]}"
+              IFS='+' read -r -a auu <<< "\${aee[1]}"
+              IFS='-' read -r -a aww <<< "\${aoo[1]}"
+              IFS=':' read -r -a aqq <<< "\${auu[0]}"
+              fm=0
+              for de in "\${aww[@]}"; do
+                if [ "\${de::1}" == "0" ]; then
+                  fx="\$(echo "\${de:1:\${#de}-1}")"
+                  aww[\$fm]="\$fx"
+                fi
+                (( fm = fm + 1 ))
+              done
+              fc=0
+              for ded in "\${aqq[@]}"; do
+                if [ "\${ded::1}" == "0" ]; then
+                  fxd="\$(echo "\${ded:1:\${#ded}-1}")"
+                  aqq[\$fc]="\$fxd"
+                fi
+                (( fc = fc + 1 ))
+              done
+              erg="[NSDate dateWithYear:"\${aww[0]}" month:"\${aww[1]}" day:"\${aww[2]}" hour:"\${aqq[0]}" minute:"\${aqq[1]}" second:"\${aqq[2]}"]"
+            fi
           fi
         fi
       fi
