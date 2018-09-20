@@ -4,8 +4,10 @@
 *Why MacOS?* -> If you are wondering so, then its because i first wrote the bash script on my mac, then ported it to iOS :P 
 
 # Installation
-<b>iOS:</b> Type 'su' in terminal to enter Root Mode, and then run the FLxCInstaller.sh\
+<b>iOS:</b> Type 'su' in terminal to enter Root Mode, and then run the FLxCInstaller.sh (Case sensitive!)\
 <b>MacOS:</b> Double-Click the install.command
+
+*Note -> If you encounter a <b>'permission denied'</b> error then run chmod +x [scriptpath] in terminal*
 
 # Usage
 <b>FlxC</b> (Shows Menu to select Patch)\
