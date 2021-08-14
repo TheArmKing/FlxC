@@ -1,5 +1,5 @@
 # FlxC
-<b>Flex2MSConverter</b> to help you convert your patches to MS Easily and Accurately!\
+<b>Flex2MSConverter</b> for jailbroken iOS to help you convert your patches to MS easily and accurately!
 
 # Installation
 Download the deb from releases and simply install on your jailbroken iOS device. 
